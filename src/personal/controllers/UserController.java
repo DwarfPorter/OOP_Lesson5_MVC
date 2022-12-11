@@ -26,4 +26,12 @@ public class UserController {
 
         throw new Exception("User not found");
     }
+
+    public void updateUser(String id, String firstName, String lastName, String phone) {
+        repository.UpdateUser(id, firstName, lastName, phone);
+    }
+
+    public void deleteUser(String id) {
+        repository.DeleteUser(id);
+    }
 }

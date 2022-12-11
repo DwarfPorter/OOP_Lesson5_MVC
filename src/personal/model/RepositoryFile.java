@@ -2,6 +2,7 @@ package personal.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RepositoryFile implements Repository {
     private UserMapper mapper = new UserMapper();
@@ -9,6 +10,14 @@ public class RepositoryFile implements Repository {
 
     public RepositoryFile(FileOperation fileOperation) {
         this.fileOperation = fileOperation;
+    }
+
+    private void RepositorySave(List<User> users){
+        List<String> lines = new ArrayList<>();
+        for (User item: users) {
+            lines.add(mapper.map(item));
+        }
+        fileOperation.saveAllLines(lines);
     }
 
     @Override
@@ -23,24 +32,47 @@ public class RepositoryFile implements Repository {
 
     @Override
     public String CreateUser(User user) {
-
         List<User> users = getAllUsers();
-        int max = 0;
-        for (User item : users) {
-            int id = Integer.parseInt(item.getId());
-            if (max < id){
-                max = id;
+        users.add(user);
+        RepositorySave(users);
+        return user.getId();
+    }
+
+    @Override
+    public void UpdateUser(String id, String firstName, String lastName, String phone) {
+        List<User> users = getAllUsers();
+        try {
+            for (User item: users) {
+                if (Objects.equals(id, item.getId())) {
+                    item.setFirstName(firstName);
+                    item.setLastName(lastName);
+                    item.setPhone(phone);
+                    break;
+                }
             }
         }
-        int newId = max + 1;
-        String id = String.format("%d", newId);
-        user.setId(id);
-        users.add(user);
-        List<String> lines = new ArrayList<>();
-        for (User item: users) {
-            lines.add(mapper.map(item));
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
         }
-        fileOperation.saveAllLines(lines);
-        return id;
+        RepositorySave(users);
+    }
+
+    @Override
+    public void DeleteUser(String id) {
+        List<User> users = getAllUsers();
+        try {
+            for (User item: users) {
+                if (Objects.equals(id, item.getId())) {
+                    users.remove(item);
+                    break;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+        RepositorySave(users);
     }
 }
