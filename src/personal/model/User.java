@@ -1,12 +1,18 @@
 package personal.model;
 
+import com.sun.org.apache.bcel.internal.generic.GOTO;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class User {
-    private String id = "";
+    private static final AtomicInteger GUID = new AtomicInteger(0);
+    private Integer id;
     private String firstName;
     private String lastName;
     private String phone;
 
     public User(String firstName, String lastName, String phone) {
+        this.id = GUID.incrementAndGet();
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -14,15 +20,21 @@ public class User {
 
     public User(String id, String firstName, String lastName, String phone) {
         this(firstName, lastName, phone);
-        this.id = id;
+        this.id = Integer.parseInt(id);
     }
 
-    public String getId() {
+    public int getIntId() {
         return id;
     }
+    public String getId() {
+        return id.toString();
+    }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+    public void setId(String id) {
+        this.id = Integer.parseInt(id);
     }
 
     public String getFirstName() {
