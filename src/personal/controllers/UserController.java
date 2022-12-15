@@ -28,6 +28,10 @@ public class UserController {
         repository.updateUser(id);
     }
 
+    public void getAllUsers() {
+        System.out.println(repository.getAllUsers());
+    }
+
     public User readUser(String userId) throws Exception {
         List<User> users = repository.getAllUsers();
         for (User user : users) {

@@ -39,14 +39,13 @@ public class ViewUser {
                     }
                     break;
                 case LIST:
-                    System.out.println(userController.getRepository().getAllUsers());
+                    userController.getAllUsers();
                     break;
                 case UPDATE:
                     try {
                         System.out.println(userController.getRepository().getAllUsers());
                         id = prompt("Введите идентификатор пользователя, данные которого Вы желаете обновить: ");
                         userController.updateUser(id);
-//                        userController.saveUser(new User(firstName, lastName, phone));
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
