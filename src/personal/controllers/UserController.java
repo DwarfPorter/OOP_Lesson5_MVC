@@ -12,8 +12,20 @@ public class UserController {
         this.repository = repository;
     }
 
+    public Repository getRepository() {
+        return repository;
+    }
+
     public void saveUser(User user) {
         repository.CreateUser(user);
+    }
+
+    public void deleteUser(String id) {
+        repository.deleteUser(id);
+    }
+
+    public void updateUser(String id) {
+        repository.updateUser(id);
     }
 
     public User readUser(String userId) throws Exception {
