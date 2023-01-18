@@ -3,6 +3,7 @@ package personal.views;
 import personal.controllers.UserController;
 import personal.model.User;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ViewUser {
@@ -18,8 +19,9 @@ public class ViewUser {
 
         while (true) {
             String command = prompt("Введите команду: ");
-            com = Commands.valueOf(command);
+            com = Commands.valueOf(command.toUpperCase());
             if (com == Commands.EXIT) return;
+            try {
             switch (com) {
                 case CREATE:
                     String firstName = prompt("Имя: ");
@@ -29,13 +31,21 @@ public class ViewUser {
                     break;
                 case READ:
                     String id = prompt("Идентификатор пользователя: ");
-                    try {
                         User user = userController.readUser(id);
                         System.out.println(user);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
+                case LIST:
+                    List<User> lst=userController.readList();
+                    lst.forEach(i-> System.out.println(i+"\n"));
+                    break;
+                case UPDATE:
+                    String numId = prompt("Какого пользователя редактировать? Введите ID: ");
+                    userController.idPresenceValidation(numId);
+                    userController.updateUser(numId, creatAGuy());
+                    break;
+            }
+            } catch (Exception e) {
+                System.out.println("ERROR\n"+e.getMessage());
             }
         }
     }
@@ -45,4 +55,12 @@ public class ViewUser {
         System.out.print(message);
         return in.nextLine();
     }
+    private User creatAGuy(){
+        String firstName = prompt("Имя: ");
+        String lastName = prompt("Фамилия: ");
+        String phone = prompt("Номер телефона: ");
+        User newGuy = new User(firstName, lastName, phone);
+        return newGuy;
+    }
+
 }
