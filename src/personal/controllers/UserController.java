@@ -2,6 +2,7 @@ package personal.controllers;
 
 import personal.model.Repository;
 import personal.model.User;
+import personal.model.ValidateUser;
 
 import java.util.List;
 
@@ -12,7 +13,11 @@ public class UserController {
         this.repository = repository;
     }
 
-    public void saveUser(User user) {
+    public ValidateUser validator = new ValidateUser();
+
+
+    public void saveUser(User user) throws Exception {
+        validator.check(user);
         repository.CreateUser(user);
     }
 
@@ -25,5 +30,15 @@ public class UserController {
         }
 
         throw new Exception("User not found");
+    }
+
+    public List<User> readUsers(){
+        List<User> users = repository.getAllUsers();
+        return users;
+    }
+
+    public void deleteUser(String usrId){
+        repository.deleteUser(usrId);
+
     }
 }
