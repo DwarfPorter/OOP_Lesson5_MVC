@@ -39,9 +39,9 @@ public class FileOperationImpl implements FileOperation {
             }
             fr.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return lines;
     }

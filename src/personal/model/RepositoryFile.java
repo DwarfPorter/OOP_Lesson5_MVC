@@ -16,7 +16,7 @@ public class RepositoryFile implements Repository {
         List<String> lines = fileOperation.readAllLines();
         List<User> users = new ArrayList<>();
         for (String line : lines) {
-            users.add(mapper.map(line));
+            users.add(mapper.alternativeMap(line));
         }
         return users;
     }
@@ -38,9 +38,18 @@ public class RepositoryFile implements Repository {
         users.add(user);
         List<String> lines = new ArrayList<>();
         for (User item: users) {
-            lines.add(mapper.map(item));
+            lines.add(mapper.alternativeMap(item));
         }
         fileOperation.saveAllLines(lines);
         return id;
+    }
+
+    public void refreshRepository(List<User> users) {
+
+        List<String> lines = new ArrayList<>();
+        for (User item: users) {
+            lines.add(mapper.map(item));
+        }
+        fileOperation.saveAllLines(lines);
     }
 }

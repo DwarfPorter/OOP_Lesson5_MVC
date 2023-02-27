@@ -1,10 +1,15 @@
 package personal.views;
 
 public enum Commands {
-    NONE,
     READ,
+    HELP,
     CREATE,
     UPDATE,
+
+    FIRSTNAME,
+    LASTNAME,
+    PHONE,
+    BACK,
     LIST,
     DELETE,
     EXIT
