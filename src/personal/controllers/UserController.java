@@ -39,6 +39,9 @@ public class UserController {
 
     public void deleteUser(String usrId){
         repository.deleteUser(usrId);
+    }
 
+    public void updateUser(String id, String firstName, String lastName, String phone){
+        repository.updateUser(id, firstName, lastName, phone);
     }
 }

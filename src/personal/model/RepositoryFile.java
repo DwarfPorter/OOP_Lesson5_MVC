@@ -1,5 +1,7 @@
 package personal.model;
 
+import personal.views.ViewUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,20 @@ public class RepositoryFile implements Repository {
         if (findUser != null) {
             users.remove(findUser);
         }
+        saveRepository(users);
+    }
+
+    public void updateUser(String id, String firstName, String lastName, String phone) {
+        List<User> users = getAllUsers();
+        User findUser = null;
+        for (User user : users){
+            if (user.getId().equals(id)){
+                findUser = user;
+            }
+        }
+        findUser.setFirstName(firstName);
+        findUser.setLastName(lastName);
+        findUser.setPhone(phone);
         saveRepository(users);
     }
 }

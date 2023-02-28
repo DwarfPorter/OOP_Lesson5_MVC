@@ -35,7 +35,10 @@ public class ViewUser {
                         caseList();
                         break;
                     case DELETE:
-                        cadeDelete();
+                        caseDelete();
+                        break;
+                    case UPDATE:
+                        caseUpdate();
                         break;
                 }
             } catch (Exception e) {
@@ -44,7 +47,16 @@ public class ViewUser {
         }
     }
 
-    private void cadeDelete() {
+    private void caseUpdate() {
+        String id = prompt("Идентификатор пользователя: ");
+        String firstName = prompt("Имя: ");
+        String lastName = prompt("Фамилия: ");
+        String phone = prompt("Номер телефона: ");
+        userController.updateUser(id, firstName, lastName, phone);
+        System.out.println("Контакт перезаписан!");
+    }
+
+    private void caseDelete() {
         String id = prompt("Идентификатор пользователя: ");
         userController.deleteUser(id);
         System.out.println("Пользователь удалён!");
