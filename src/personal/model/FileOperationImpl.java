@@ -19,25 +19,13 @@ public class FileOperationImpl implements FileOperation {
 
     public List<String> readAllLines() {
         List<String> lines = new ArrayList<>();
-        try {
-            File file = new File(fileName);
-            //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(fr);
-            // считаем сначала первую строку
-            String line = reader.readLine();
-            if (line != null) {
-                lines.add(line);
-            }
-            while (line != null) {
-                // считываем остальные строки в цикле
-                line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            while (reader.ready()) {
+                String line = reader.readLine();
                 if (line != null) {
                     lines.add(line);
                 }
             }
-            fr.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {

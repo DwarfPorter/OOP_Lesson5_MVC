@@ -1,17 +1,21 @@
 package personal.views;
 
 public enum HelpEnum {
-    MAIN_MENU("READ - посмотреть контакт\n" +
-            "CREATE - создать контакт\n" +
-            "UPDATE - изменит контакт\n" +
-            "DELETE - удалить контакт\n" +
-            "HELP - помощь\n" +
-            "LIST - посмотреть все контакты\n" +
-            "EXIT - выход\n"),
-    UPDATE_MENU("FIRSTNAME - изменить имя контакта\n" +
-            "LASTNAME - изменить фамилмю контакта\n" +
-            "PHONE - изменить номер контакта\n" +
-            "BACK - назад в главное меню\n");
+    MAIN_MENU("""
+            READ - посмотреть контакт
+            CREATE - создать контакт
+            UPDATE - изменит контакт
+            DELETE - удалить контакт
+            HELP - помощь
+            LIST - посмотреть все контакты
+            EXIT - выход
+            """),
+    UPDATE_MENU("""
+            FIRSTNAME - изменить имя контакта
+            LASTNAME - изменить фамилмю контакта
+            PHONE - изменить номер контакта
+            BACK - назад в главное меню
+            """);
 
 
     private final String text;

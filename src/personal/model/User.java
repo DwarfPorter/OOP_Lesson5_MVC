@@ -5,6 +5,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String phone;
+    private int typeOfFormat;
 
     public User(String firstName, String lastName, String phone) {
         this.firstName = firstName;
@@ -12,13 +13,25 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String id, String firstName, String lastName, String phone) {
+    public User(String firstName, String lastName, String phone, int typeOfFormat) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.typeOfFormat = typeOfFormat;
+    }
+
+    public User(String id, String firstName, String lastName, String phone, int typeOfFormat) {
         this(firstName, lastName, phone);
         this.id = id;
+        this.typeOfFormat = typeOfFormat;
     }
 
     public String getId() {
         return id;
+    }
+
+    public int getTypeOfFormat() {
+        return typeOfFormat;
     }
 
     public void setId(String id) {
@@ -51,6 +64,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("Идентафикатор: %s\nИмя: %s,\nФамилия: %s,\nТелефон: %s", id, firstName, lastName, phone);
+        return String.format("Идентафикатор: %s\nИмя: %s\nФамилия: %s\nТелефон: %s", id, firstName, lastName, phone);
     }
 }

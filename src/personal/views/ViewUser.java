@@ -18,30 +18,20 @@ public class ViewUser {
         Commands com;
         while (true) {
             try {
-                System.out.println("Основное меню");
+                System.out.println("Основное меню\n");
                 String command = prompt("Введите команду (введите help для просмтора доступных команд): ");
                 com = Commands.valueOf(command.toUpperCase());
                 if (com == Commands.EXIT) return;
                 switch (com) {
-                    case CREATE:
-                        createUser();
-                        break;
-                    case READ:
-                        showUser();
-                        break;
-                    case LIST:
-                        showAllUsers();
-                        break;
-                    case DELETE:
-                        deleteUser();
-                        break;
-                    case UPDATE:
+                    case CREATE -> createUser();
+                    case READ -> showUser();
+                    case LIST -> showAllUsers();
+                    case DELETE -> deleteUser();
+                    case UPDATE -> {
                         checkBase();
                         updateUserInfo();
-                        break;
-                    case HELP:
-                        System.out.println(HelpEnum.MAIN_MENU);
-                        break;
+                    }
+                    case HELP -> System.out.println(HelpEnum.MAIN_MENU);
                 }
             } catch (Exception e) {
                 System.out.printf("Something wrong - %s\n", e.getMessage());
@@ -49,12 +39,25 @@ public class ViewUser {
         }
     }
 
+    private int chooseTypeOfFormat() {
+        try {
+            return Integer.parseInt(prompt("Введите 1 для записи через запятую, 2 для записи через точку с запятой: "));
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
     private void createUser() {
+        int typeOfFormat = chooseTypeOfFormat();
+        if (typeOfFormat == -1) {
+            System.out.println("Something wrong\n");
+            return;
+        }
         String firstName = prompt("Имя: ");
         String lastName = prompt("Фамилия: ");
         String phone = prompt("Номер телефона: ");
-        userController.saveUser(new User(firstName, lastName, phone));
-        System.out.println("Contact has been successfully added");
+        userController.saveUser(new User(firstName, lastName, phone, typeOfFormat));
+        System.out.println("Contact has been successfully added\n");
     }
 
     private void showUser() {
@@ -85,7 +88,7 @@ public class ViewUser {
             checkBase();
             String id = prompt("Идентификатор пользователя: ");
             userController.deleteUser(id);
-            System.out.println("Deleted successfully");
+            System.out.println("Deleted successfully\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -93,33 +96,22 @@ public class ViewUser {
 
     private void updateUserInfo() {
         Commands com;
-        while (true) {
-            try {
-                System.out.println("Меню изменения контакта");
-                String command = prompt("Введите команду (введите help для просмтора доступных команд): ");
-                com = Commands.valueOf(command.toUpperCase());
-                if (com == Commands.EXIT) return;
-                switch (com) {
-                    case BACK:
-                        run();
-                        break;
-                    case FIRSTNAME:
-                        updateFirstName();
-                        break;
-                    case LASTNAME:
-                        updateLastName();
-                        break;
-                    case PHONE:
-                        updatePhoneNumber();
-                        break;
-                    case HELP:
-                        System.out.println(HelpEnum.UPDATE_MENU);
-                        break;
-                }
-            } catch (Exception e) {
-                System.out.printf("Something wrong - %s\n", e.getMessage());
+        try {
+            System.out.println("Меню изменения контакта\n");
+            String command = prompt("Введите команду (введите help для просмтора доступных команд): ");
+            com = Commands.valueOf(command.toUpperCase());
+            if (com == Commands.EXIT) return;
+            switch (com) {
+                case BACK -> run();
+                case FIRSTNAME -> updateFirstName();
+                case LASTNAME -> updateLastName();
+                case PHONE -> updatePhoneNumber();
+                case HELP -> System.out.println(HelpEnum.UPDATE_MENU);
             }
+        } catch (Exception e) {
+            System.out.printf("Something wrong - %s\n", e.getMessage());
         }
+
 
     }
 
@@ -128,7 +120,7 @@ public class ViewUser {
         String newInfo = prompt("Введите новое имя: ");
         try {
             userController.updateUser(id, newInfo, 1);
-            System.out.println("Firstname changed");
+            System.out.println("Firstname changed\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -139,7 +131,7 @@ public class ViewUser {
         String newInfo = prompt("Введите новую фамилию: ");
         try {
             userController.updateUser(id, newInfo, 1);
-            System.out.println("Lastname changed");
+            System.out.println("Lastname changed\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -150,7 +142,7 @@ public class ViewUser {
         String newInfo = prompt("Введите новый телефон: ");
         try {
             userController.updateUser(id, newInfo, 1);
-            System.out.println("Phone number changed");
+            System.out.println("Phone number changed\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -158,7 +150,7 @@ public class ViewUser {
 
     private void checkBase() throws Exception {
         if (userController.readAllUsers().isEmpty()) {
-            throw new Exception("Base is empty");
+            throw new Exception("Base is empty\n");
         }
     }
 

@@ -50,18 +50,18 @@ public class UserController {
         for (User user : users) {
             if (user.getId().equals(userId)) {
                 switch (operation) {
-                    case 1:
+                    case 1 -> {
                         user.setFirstName(newInfo);
                         repository.refreshRepository(users);
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         user.setLastName(newInfo);
                         repository.refreshRepository(users);
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         user.setPhone(newInfo);
                         repository.refreshRepository(users);
-                        break;
+                    }
                 }
                 return true;
             }
