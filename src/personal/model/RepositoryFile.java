@@ -2,14 +2,14 @@ package personal.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class RepositoryFile implements Repository {
-    private UserMapper mapper = new UserMapper();
+    private UserMapper mapper;
     private FileOperation fileOperation;
 
-    public RepositoryFile(FileOperation fileOperation) {
+    public RepositoryFile(FileOperation fileOperation, UserMapper mapper) {
         this.fileOperation = fileOperation;
+        this.mapper = mapper;
     }
 
     @Override

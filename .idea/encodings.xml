@@ -3,10 +3,10 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/personal/Main.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/personal/controllers/UserController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/personal/model/DefaultUserMapper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/personal/model/FileOperation.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/personal/model/Repository.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/personal/model/RepositoryFile.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/personal/model/UserMapper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/personal/views/Commands.java" charset="UTF-8" />
   </component>
 </project>
