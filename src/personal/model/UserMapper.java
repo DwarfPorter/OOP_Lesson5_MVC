@@ -8,7 +8,7 @@ public class UserMapper implements Mapper {
 
     @Override
     public String mapWithSemicolon(User user) {
-        return String.format("%s; %s; %s; %s", user.getId(), user.getFirstName(), user.getLastName(), user.getPhone());
+        return String.format("%s;%s;%s;%s\n", user.getId(), user.getFirstName(), user.getLastName(), user.getPhone());
     }
 
     @Override
